@@ -30,7 +30,7 @@ The shell also contains two builtins which are commands that are within the shel
 All files will be compiled with the following: 
 
 
-        * $ gcc -Wall -Werror -Wextra -pedantic *.c
+        * gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 
 ## **List of useful commands**

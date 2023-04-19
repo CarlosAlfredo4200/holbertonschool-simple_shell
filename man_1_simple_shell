@@ -1,0 +1,14 @@
+.TH SIMPLE_SHELL 17 de abril de 2023" "Simple Shell Manual Page"
+
+
+.SH Descripción
+This is a simple command language interpreter capable of executing commands read
+from standard input. This shell is also capable of having commands piped in from the background.
+
+.SH Purposes
+its function is to read command lines in the terminal that can be written directly to the running shell or can be piped.
+
+.SH Invocación
+Shell could run in interactive mode where input is accepted from the keyboard. It also works in non-interactive mode, the shell running from a script or
+standard input of a standard echo output.
+

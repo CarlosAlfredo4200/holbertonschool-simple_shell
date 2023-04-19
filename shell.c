@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -87,12 +86,16 @@ char **shell_split_line(char *line)
 
 char *shell_read_line()
 {
-  char *line;
-  line = NULL;
-  size_t buflen = 0;
-  errno = 0;
+
+  size_t buflen;
   ssize_t strlen;
   
+  char *line;
+  line = NULL;
+ 
+  buflen = 0;
+  errno = 0;
+   
   strlen = getline(&line, &buflen, stdin);
   if (strlen < 0)
     {
@@ -103,24 +106,4 @@ char *shell_read_line()
       exit(1);
     }
   return line;
-}
-
-int main()
-{
-  while (true)
-    {
-      char *line;
-      char **tokens;
-      printf("Escribe la instruccion: > ");
-      line = shell_read_line();
-      tokens = shell_split_line(line);
-
-      if (tokens[0] != NULL)
-        {
-	  shell_exec(tokens);
-        }
-
-      free(tokens);
-      free(line);
-    }
 }

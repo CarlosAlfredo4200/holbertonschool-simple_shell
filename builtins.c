@@ -1,9 +1,8 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "myShell.h"
-
+#include "builtins.h"
 
 struct builtin builtins[] = {
 	    {"help", shell_help},

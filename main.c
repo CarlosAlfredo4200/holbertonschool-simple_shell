@@ -1,9 +1,7 @@
 #include "myShell.h"
 
-int shell_num_builtins() {
-  return sizeof(builtins) / sizeof(struct builtin);
-}
 int main(void) {
+
   char *line;
   char **tokens;
   while (true) {

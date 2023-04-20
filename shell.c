@@ -50,6 +50,7 @@ char **shell_split_line(char *line)
   int capacity = 16;
   char *delimiters;
   char *token;
+  char **new_tokens;
   
   char **tokens = malloc(capacity * sizeof(char *));
   if (!tokens)
@@ -69,12 +70,13 @@ char **shell_split_line(char *line)
       if (length >= capacity)
         {
 	  capacity = (int)(capacity * 1.5);
-	  tokens = realloc(tokens, capacity * sizeof(char *));
-	  if (!tokens)
+	  new_tokens = realloc(tokens, capacity * sizeof(char *));
+	  if (!new_tokens)
             {
 	      perror("shell");
 	      exit(1);
             }
+	  tokens = new_tokens;
         }
 
       token = strtok(NULL, delimiters);

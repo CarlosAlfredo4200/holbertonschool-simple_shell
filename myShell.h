@@ -8,6 +8,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <sys/stat.h>
 #include "builtins.h"
 
 void shell_exit(char **args);

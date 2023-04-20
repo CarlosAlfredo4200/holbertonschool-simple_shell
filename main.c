@@ -1,4 +1,5 @@
 #include "myShell.h"
+int main() 
 {
     int num;
     int status = 0;

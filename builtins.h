@@ -2,9 +2,10 @@
 #define BUILTINS_H
 
 
-struct builtin {
-  char *name;
-  void (*func)(char **args);
+struct builtin
+{
+char *name;
+void (*func)(char **args);
 };
 
 

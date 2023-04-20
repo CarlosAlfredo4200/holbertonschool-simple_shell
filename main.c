@@ -1,18 +1,21 @@
 #include "myShell.h"
 int main()
 {
-  while (true)
-    {
-      char *line;
-      char **tokens;
-      printf(" ");
-      line = shell_read_line();
-      tokens = shell_split_line(line);
-      if (tokens[0] != NULL)
-	{
-	  shell_exec(tokens);
-	}
-      free(tokens);
-      free(line);
-    }
-} 
+  char *line;
+  char **args;
+  int status;
+
+  do
+  {
+    printf("shell> ");
+    line = shell_read_line();
+    args = shell_split_line(line);
+    shell_exec(args);
+
+    free(line);
+    free(args);
+
+  } while (status);
+
+  return 0;
+}

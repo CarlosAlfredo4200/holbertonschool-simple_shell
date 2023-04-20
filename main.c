@@ -1,18 +1,19 @@
 #include "myShell.h"
-int main()
 {
-  while (true)
-    {
-      char *line;
-      char **tokens;
-      printf(" ");
-      line = shell_read_line();
-      tokens = shell_split_line(line);
-      if (tokens[0] != NULL)
-	{
-	  shell_exec(tokens);
-	}
-      free(tokens);
-      free(line);
-    }
+    int num;
+    int status = 0;
+
+    do {
+        printf(" ");
+        scanf("%d", &num);
+
+        if (num < 0) {
+            printf("Error: El número debe ser positivo.\n");
+            status = 1;
+        } else {
+            printf("El número ingresado es: %d\n", num);
+        }
+    } while (status);
+
+    return 0;
 }

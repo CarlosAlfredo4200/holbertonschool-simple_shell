@@ -19,7 +19,7 @@ void shell_cd(char **args)
 {
   if (args[1] == NULL)
     {
-      fprintf(stderr, "shell: cd: missing argument\n");
+      fprintf(stderr, "shell: cd: missing argument not found\n");
     }
   else
     {

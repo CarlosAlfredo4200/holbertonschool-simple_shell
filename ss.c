@@ -1,157 +1,116 @@
 #include "ss.h"
-
-
-
+char *name;
 /**
- *
- *  **_strcat(char *dest, char *src)- a function that concatenates two strings.
- *
- *   *@dest: Char input
- *
- *    *@src: Char input
- *
- *     *
- *
- *      * Return: Always 0.
- *
- *       */
+ * main - print prompt, handle EOF, read file_stream
+ * @argc: arg count (not needed)
+ * @argv: argv for command
+ * Return: Always 0.
+ */
 
-char *_strcat(char *dest, char *src)
-
+int main(int argc, char *argv[])
 {
+	char *s = NULL;
+	size_t buffer_size = 0;
+	ssize_t file_stream = 0;
 
-		int j = 0;
+	(void) argc;
+	name = argv[0];
 
+	while (1)
+	{
+		if (isatty(STDIN_FILENO) == 1)
+			write(1, "$X ", 2);
+		file_stream = getline(&s, &buffer_size, stdin);
+		if (file_stream == -1)
+		{
+			if (isatty(STDIN_FILENO) == 1)
+				write(1, "\n", 1);
+			break;
+		}
 
-
-			int length = strlen(dest);
-
-
-
-				while (src[j] != '\0')
-
-						{
-
-									dest[length] = src[j];
-
-											length++;
-
-													j++;
-
-														}
-
-					dest[length] = '\0';
-
-						return (dest);
-
+		if (s[file_stream - 1]  == '\n')
+			s[file_stream - 1]  = '\0';
+		if (*s == '\0')
+			continue;
+		if (cmd_read(s, file_stream) == 2)
+			break;
+	}
+	free(s);
+	s = NULL;
+	return (0);
 }
-
-
-
 /**
- *
- *  * _strcmp - compares two strings
- *
- *   * @s1: first string
- *
- *    * @s2: second string to compare to first string
- *
- *     *
- *
- *      * Return: <0 if s1 is less than s2, 0 for equal, >0 if s1 is greater than s2
- *
- *       */
-
-
-
-
-
-/**
- *
- *  * char *_strcpy- Copies a string
- *
- *   *@dest: The new, coppied string
- *
- *    *@src: The original string to copy
- *
- *     *
- *
- *      * Return: Always 0.
- *
- *       */
-
-
-
-
-
-/**
- *
- *  * _strlen(char *s)- a function that returns the length of a string.
- *
- *   *@s: Char
- *
- *    *
- *
- *     * Return: Always 0.
- *
- *      */
-
-
-
-
-
-/**
- *
- *  * *_strdup - copies the input string
- *
- *   * @string: input string
- *
- *    *
- *
- *     * Return: *ptr to the copied string or  NULL (if Error)
- *
- *      */
-
-char *_strdup(char *string)
-
+ * cmd_read - handles command line and tokenizes it
+ *@s: string
+ *@file_stream: getline input
+ * Return: 0
+ */
+int cmd_read(char *s, size_t __attribute__((unused))file_stream)
 {
+	char *token = NULL;
+	char *cmd_arr[100];
+	int i;
 
-		char *dup;
-
-			unsigned int i = 0, length = 0;
-
-
-
-				if (string == NULL)
-
-							return (NULL);
-
-
-
-					while (string[length])
-
-								length++;
-
-
-
-						dup = malloc(sizeof(char) * (length + 1));
-
-
-
-							if (dup == NULL)
-
-										return (NULL);
-
-
-
-								while ((dup[i] = string[i]) != '\0')
-
-											i++;
-
-
-
-									return (dup);
-
+	if (strcmp(s, "exit") == 0)
+		return (2);
+	if (strcmp(s, "env") == 0)
+		return (_printenv());
+	token = strtok(s, " "), i = 0;
+	while (token)
+	{
+		cmd_arr[i++] = token;
+		token = strtok(NULL, " ");
+	}
+	cmd_arr[i] = NULL;
+/* Return status code */
+	return (call_command(cmd_arr));
 }
+/**
+ * print_not_found - prints when cmd is not found in path
+ *
+ * @cmd: a string provided by the stdin
+ */
+void print_not_found(char *cmd)
+{
+	write(2, name, strlen(name));
+	write(2, ": 1: ", 5);
+	write(2, cmd, strlen(cmd));
+	write(2, ": not found\n", 12);
+}
+/**
+ * call_command - calls cmd, forks, execve
+ *
+ * @cmd_arr: a string provided by the stdin
+ * Return: 0
+ */
+int call_command(char *cmd_arr[])
+{
+	char *exe_path_str = NULL;
+	char *cmd = NULL;
+	pid_t is_child;
+	int status;
 
-
+	cmd = cmd_arr[0];
+	exe_path_str = pathfinder(cmd);
+	if (exe_path_str == NULL)
+	{
+		print_not_found(cmd);
+		return (3);
+	}
+	is_child = fork();
+	if (is_child < 0)
+	{
+		perror("Error:");
+		return (-1);
+	}
+	if (is_child > 0)
+		wait(&status);
+	else if (is_child == 0)
+	{
+		(execve(exe_path_str, cmd_arr, environ));
+		perror("Error:");
+		exit(1);
+	}
+	free(exe_path_str);
+	return (0);
+}

@@ -4,7 +4,7 @@ int main()
   char *line;
   char **args;
   int status;
-  status = 0:
+  status = 0;
 
   do
   {

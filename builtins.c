@@ -40,7 +40,7 @@ printf("%s", helptext);
 
 }
 
-int shell_num_builtins(void);
+int shell_num_builtins(void)
 {
 
 (return sizeof(builtins) / sizeof(struct builtin));

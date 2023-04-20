@@ -7,7 +7,7 @@ int status;
 status = 0;
 
 do {
-printf(" ");
+write(1, "$x ", 2);
 line = shell_read_line();
 args = shell_split_line(line);
 shell_exec(args);

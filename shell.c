@@ -47,7 +47,7 @@ void shell_exec(char **args)
 char **shell_split_line(char *line)
 {
   int length = 0;
-  int capacity = 14;
+  int capacity = 16;
   char *delimiters;
   char *token;
   char **new_tokens;

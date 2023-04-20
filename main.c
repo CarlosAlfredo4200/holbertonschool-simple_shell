@@ -5,7 +5,7 @@ int main()
     {
       char *line;
       char **tokens;
-      printf("Escribe la instruccion: > ");
+      printf(" ");
       line = shell_read_line();
       tokens = shell_split_line(line);
       if (tokens[0] != NULL)

@@ -8,7 +8,7 @@ int main()
 
   do
   {
-    printf("shell> ");
+    printf(" ");
     line = shell_read_line();
     args = shell_split_line(line);
     shell_exec(args);

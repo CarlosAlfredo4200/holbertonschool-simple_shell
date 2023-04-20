@@ -98,7 +98,7 @@ c = getchar();
 if (c == EOF || c == '\n')
 {
 buffer[position] = '\0';
-(return) buffer;
+return (buffer);
 }
 else
 {

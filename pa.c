@@ -1,121 +1,50 @@
 #include "ss.h"
-
+#include "simple_shell.h"
 /**
+ * pathfinder - Takes PATH string, tokenizes it, then concats with "/" & cmd
+ *@cmd: command passed from getline in main
  *
- *  * _printenv - prints environment like printenv
- *
- *   *
- *
- *    * Return: 0
- *
- *     */
-
-int _printenv(void)
-
+ * Return: new_path for use in cmd_read
+ */
+char *pathfinder(char *cmd)
 {
+	char *path = _strdup(_getenv("PATH"));
+	int i = 0, j = 0;
+	char *path_tokens = strtok(path, ":");
+	char *path_array[100];
+	char *s2 = cmd;
+	char *new_path = NULL;
+	struct stat buf;
 
-		char *s = environ[0];
+	new_path = malloc(sizeof(char) * 100);
+	if (_getenv("PATH")[0] == ':')
+		if (stat(cmd, &buf) == 0)
+			return (_strdup(cmd));
+	while (path_tokens != NULL)
+	{
+		path_array[i++] = path_tokens;
+		path_tokens = strtok(NULL, ":");
+	}
+	path_array[i] = NULL;
+	for (j = 0; path_array[j]; j++)
+	{
+		strcpy(new_path, path_array[j]);
+		strcat(new_path, "/");
+		strcat(new_path, s2);
+		strcat(new_path, "\0");
 
-			int i = 0;
-
-
-
-				while (s)
-
-						{
-
-									write(1, s, strlen(s));
-
-											write(1, "\n", 1);
-
-													s = environ[++i];
-
-														}
-
-					return (0);
-
+		if (stat(new_path, &buf) == 0)
+		{
+			free(path);
+			return (new_path);
+		}
+		else
+			new_path[0] = 0;
+	}
+	free(path);
+	free(new_path);
+/* This is for after PATH checked and cmd is there locally */
+	if (stat(cmd, &buf) == 0)
+		return (_strdup(cmd));
+	return (NULL);
 }
-
-
-
-/**
- *
- *  * _str_n_cmp - lexicographically compares not more than count chars
- *
- *   * from two strings and returns an integer based on the result.
- *
- *    * @s1: first string
- *
- *     * @s2: second string to compare to first string
- *
- *      * @n: count of the comparison between s1 and s2
- *
- *       * Return: <0 if s1 is less than s2, 0 for equal, >0 if s1 is greater than s2
- *
- *        * Description: Src code file like GNU C library
- *
- *         */
-
-int _str_n_cmp(char *s1, char *s2, int n)
-
-{
-
-		char c1, c2;
-
-
-
-			while (n--)
-
-					{
-
-								c1 = *s1++;
-
-										c2 = *s2++;
-
-												if (c1 == '\0' || c1 != c2)
-
-													/* compare at most, first n bytes of both strings */
-
-																return (c1 > c2 ? 1 : (c1 < c2 ? -1 : 0));
-
-													}
-
-							return (0);
-
-}
-
-/**
- *
- *  * _getenv - prints environment like getenv
- *
- *   * @var: environ variable
- *
- *    *
- *
- *     * Return: 0
- *
- *      */
-
-char *_getenv(char *var)
-
-{
-
-		int i = 0;
-
-
-
-			for (i = 0; environ[i]; i++)
-
-					{
-
-								if (_str_n_cmp(environ[i], var, strlen(var)) == 0)
-
-												return (&environ[i][strlen(var)]);
-
-									}
-
-				return (NULL);
-
-}
-
-

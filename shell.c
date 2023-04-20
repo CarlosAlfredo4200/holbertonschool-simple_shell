@@ -75,7 +75,7 @@ token = strtok(NULL, delimiters);
 }
 
 tokens[length] = NULL;
-(return) tokens;
+return (tokens);
 }
 
 char *shell_read_line()

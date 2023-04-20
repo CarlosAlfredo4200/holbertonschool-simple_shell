@@ -59,28 +59,28 @@ char **shell_split_line(char *line)
       exit(1);
     }
 
-  delimiters = " \t\r\n";
+  delimiters = " \t\r\n\a";
   token = strtok(line, delimiters);
 
-  while (token != NULL)
+    while (token != NULL)
+  {
+    tokens[length++] = token;
+
+    if (length >= capacity)
     {
-      tokens[length] = token;
-      length++;
-
-      if (length >= capacity)
-        {
-	  capacity = (int)(capacity * 1.5);
-	  new_tokens = realloc(tokens, capacity * sizeof(char *));
-	  if (!new_tokens)
-            {
-	      perror("shell");
-	      exit(1);
-            }
-	  tokens = new_tokens;
-        }
-
-      token = strtok(NULL, delimiters);
+      capacity *= 2;
+      new_tokens = realloc(tokens, capacity * sizeof(char *));
+      if (!new_tokens)
+      {
+        free(tokens);
+        perror("shell");
+        exit(1);
+      }
+      tokens = new_tokens;
     }
+
+    token = strtok(NULL, delimiters);
+  }
 
   tokens[length] = NULL;
   return tokens;
@@ -88,24 +88,40 @@ char **shell_split_line(char *line)
 
 char *shell_read_line()
 {
+  int capacity = 128;
+  int position = 0;
+  char *buffer = malloc(capacity * sizeof(char));
+  int c;
 
-  size_t buflen;
-  ssize_t strlen;
-  
-  char *line;
-  line = NULL;
- 
-  buflen = 0;
-  errno = 0;
-   
-  strlen = getline(&line, &buflen, stdin);
-  if (strlen < 0)
+  if (!buffer)
+  {
+    perror("shell");
+    exit(1);
+  }
+
+  while (1)
+  {
+    c = getchar();
+
+    if (c == EOF || c == '\n')
     {
-      if (errno)
-        {
-	  perror("shell");
-        }
-      exit(1);
+      buffer[position] = '\0';
+      return buffer;
     }
-  return line;
+    else
+    {
+      buffer[position++] = c;
+    }
+
+    if (position >= capacity)
+    {
+      capacity *= 2;
+      buffer = realloc(buffer, capacity * sizeof(char));
+      if (!buffer)
+      {
+        perror("shell");
+        exit(1);
+      }
+    }
+  }
 }

@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
       if (isatty(STDIN_FILENO) == 1)
         write(1, "\n", 1);
       perror("getline");
-      free(s); /* Liberar la memoria asignada por getline */
+      free(s);
       exit(EXIT_FAILURE);
     }
 
@@ -47,7 +47,8 @@ int main(int argc, char *argv[])
       waitpid(is_child, &status, 0);
     } else {
       /* Proceso hijo */
-      execve("/bin/ls", argv, environ);
+      char *args[] = {"/bin/ls", NULL};
+      execve(args[0], args, environ);
       perror("Error:");
       free(s);
       exit(EXIT_FAILURE);

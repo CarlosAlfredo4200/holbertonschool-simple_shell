@@ -47,32 +47,54 @@ void print_not_found(char *cmd)
  */
 int call_command(char *cmd_arr[])
 {
-	char *exe_path_str = NULL;
-	char *cmd = NULL;
-	pid_t is_child;
-	int status;
+    char *exe_path_str = NULL;
+    char *cmd = NULL;
+    pid_t is_child;
+    int status;
 
-	cmd = cmd_arr[0];
-	exe_path_str = fnPath(cmd);
-	if (exe_path_str == NULL)
-	{
-		print_not_found(cmd);
-		return (3);
-	}
-	is_child = fork();
-	if (is_child < 0)
-	{
-		perror("Error:");
-		return (-1);
-	}
-	if (is_child > 0)
-		wait(&status);
-	else if (is_child == 0)
-	{
-		(execve(exe_path_str, cmd_arr, environ));
-		perror("Error:");
-		exit(1);
-	}
-	free(exe_path_str);
-	return (0);
+    cmd = cmd_arr[0];
+    exe_path_str = fnPath(cmd);
+    if (exe_path_str == NULL)
+    {
+        print_not_found(cmd);
+        return (3);
+    }
+    is_child = fork();
+    if (is_child < 0)
+    {
+        perror("Error:");
+        return (-1);
+    }
+    if (is_child > 0)
+    {
+        // Código del proceso padre
+        free(exe_path_str); // Liberar la memoria asignada a exe_path_str
+
+        // Esperar a que el proceso hijo termine sin bloquear la ejecución del programa
+        while (waitpid(is_child, &status, WNOHANG) == 0)
+        {
+            // Aquí puedes poner código adicional para ejecutar mientras esperas
+            // a que el proceso hijo termine, si es necesario
+        }
+
+        if (WIFEXITED(status))
+        {
+            // El proceso hijo terminó con éxito
+            return WEXITSTATUS(status);
+        }
+        else
+        {
+            // El proceso hijo terminó con un error
+            return -1;
+        }
+    }
+    else if (is_child == 0)
+    {
+        // Código del proceso hijo
+        (execve(exe_path_str, cmd_arr, environ));
+        perror("Error:");
+        free(exe_path_str); // Liberar la memoria asignada a exe_path_str
+        exit(1);
+    }
+    return (0);
 }

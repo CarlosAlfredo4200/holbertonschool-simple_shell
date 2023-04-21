@@ -7,22 +7,6 @@
  *
  * Return: Always 0.
  */
-char *_strcat(char *dest, char *src)
-{
-	int j = 0;
-
-	int length = strlen(dest);
-
-	while (src[j] != '\0')
-	{
-		dest[length] = src[j];
-		length++;
-		j++;
-	}
-	dest[length] = '\0';
-	return (dest);
-}
-
 
  
 /**

@@ -45,6 +45,12 @@ void print_not_found(char *cmd)
  * @cmd_arr: a string provided by the stdin
  * Return: 0
  */
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
 int call_command(char *cmd_arr[])
 {
     char *exe_path_str = NULL;
@@ -63,37 +69,37 @@ int call_command(char *cmd_arr[])
     if (is_child < 0)
     {
         perror("Error:");
+        free(exe_path_str);
         return (-1);
     }
     if (is_child > 0)
     {
-        // Código del proceso padre
-        free(exe_path_str); // Liberar la memoria asignada a exe_path_str
+       
+        free(exe_path_str);
 
-        // Esperar a que el proceso hijo termine sin bloquear la ejecución del programa
+        
         while (waitpid(is_child, &status, WNOHANG) == 0)
         {
-            // Aquí puedes poner código adicional para ejecutar mientras esperas
-            // a que el proceso hijo termine, si es necesario
+            printf("Proceso en curso...\n");
         }
 
         if (WIFEXITED(status))
         {
-            // El proceso hijo terminó con éxito
+            
             return WEXITSTATUS(status);
         }
         else
         {
-            // El proceso hijo terminó con un error
+            
             return -1;
         }
     }
     else if (is_child == 0)
     {
-        // Código del proceso hijo
+        
         (execve(exe_path_str, cmd_arr, environ));
         perror("Error:");
-        free(exe_path_str); // Liberar la memoria asignada a exe_path_str
+        free(exe_path_str);
         exit(1);
     }
     return (0);

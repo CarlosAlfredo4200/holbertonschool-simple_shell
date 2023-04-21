@@ -1,12 +1,5 @@
-#include "ss.h"
+#include "myShell.h"
 char *name;
-/**
- * main - print prompt, handle EOF, read file_stream
- * @argc: arg count (not needed)
- * @argv: argv for command
- * Return: Always 0.
- */
-
 
 /**
  * cmd_read - handles command line and tokenizes it
@@ -23,7 +16,7 @@ int cmd_read(char *s, size_t file_stream __attribute__((unused)))
 	if (strcmp(s, "exit") == 0)
 		return (2);
 	if (strcmp(s, "env") == 0)
-		return (_printenv());
+		return (envPrint());
 	token = strtok(s, " "), i = 0;
 	while (token)
 	{
@@ -60,7 +53,7 @@ int call_command(char *cmd_arr[])
 	int status;
 
 	cmd = cmd_arr[0];
-	exe_path_str = pathfinder(cmd);
+	exe_path_str = fnPATH(cmd);
 	if (exe_path_str == NULL)
 	{
 		print_not_found(cmd);

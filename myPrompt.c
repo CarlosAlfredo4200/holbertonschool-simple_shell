@@ -7,20 +7,24 @@ void prompt(char **av, char **env)
 {
     char *string = NULL;
     int i, j, status;
+    j = 0;
     size_t n = 0;
     ssize_t num_char;
     char *argv[MAX_COMMAND];
     pid_t child_pid;
+
     while (1)
     {
         if (isatty(STDIN_FILENO))
             printf("cisfun$ ");
-        num_char = getline(&string, &n, stdin) if (num_char == -1)
+        num_char = getline(&string, &n, stdin);
+	  if (num_char == -1)
         {
             free(string);
             exit(EXIT_FAILURE);
         }
         i = 0;
+	
         while (string[i])
         {
             if (string[i] == '\n')
@@ -28,11 +32,12 @@ void prompt(char **av, char **env)
             i++;
         }
         j = 0;
-        argv[1] = strtok(string, " ");
+        argv[j] = strtok(string, " ");
         while (argv[j])
         {
             argv[++j] = strtok(NULL, " ");
         }
+	
         child_pid = fork();
         if (child_pid == -1)
         {

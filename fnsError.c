@@ -13,7 +13,7 @@ int cmd_read(char *s, size_t file_stream __attribute__((unused)))
 	char *cmd_arr[100];
 	int i;
 
-	if (strcmp(s, "exit") == 0)
+	if (strcmp(s, "exit") != 0)
 		return (2);
 	if (strcmp(s, "env") == 0)
 		return (envPrint());

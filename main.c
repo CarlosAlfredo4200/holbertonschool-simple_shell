@@ -19,8 +19,9 @@ int main(int argc, char *argv[])
 
     if (file_stream == -1) {
       if (isatty(STDIN_FILENO) == 1)
-	write(1, "\n", 1);
+        write(1, "\n", 1);
       perror("getline");
+      free(s); // Liberar la memoria asignada por getline
       exit(EXIT_FAILURE);
     }
 

@@ -8,7 +8,7 @@
  */
 char *fnPath(char *command)
 {
-	char *path = _strdup(_getenv("PATH"));
+	char *path = strdup(_getenv("PATH"));
 	int i = 0, j = 0;
 	char *path_tokens = strtok(path, ":");
 	char *path_array[100];
@@ -19,7 +19,7 @@ char *fnPath(char *command)
 	new_path = malloc(sizeof(char) * 100);
 	if (_getenv("PATH")[0] == ':')
 		if (stat(command, &buf) == 0)
-			return (_strdup(command));
+			return (strdup(command));
 	while (path_tokens != NULL)
 	{
 		path_array[i++] = path_tokens;
@@ -44,6 +44,6 @@ char *fnPath(char *command)
 	free(path);
 	free(new_path);
 	if (stat(command, &buf) == 0)
-		return (_strdup(command));
+		return (strdup(command));
 	return (NULL);
 }

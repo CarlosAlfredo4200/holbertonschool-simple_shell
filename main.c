@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
   size_t buffer_size = 0;
   ssize_t file_stream = 0;
   int status;
+  pid_t is_child;
 
   (void) argc;
   name = argv[0];
@@ -35,17 +36,17 @@ int main(int argc, char *argv[])
     if (cmd_read(s, file_stream) == 2)
       break;
 
-    pid_t is_child = fork();
+    is_child = fork();
     if (is_child < 0) {
       perror("Error:");
       free(s);
       exit(EXIT_FAILURE);
     }
     if (is_child > 0) {
-      // Proceso padre
+      /* Proceso padre */
       waitpid(is_child, &status, 0);
     } else {
-      // Proceso hijo
+      /* Proceso hijo */
       execve("/bin/ls", argv, environ);
       perror("Error:");
       free(s);

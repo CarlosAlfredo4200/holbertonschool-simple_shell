@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
       waitpid(is_child, &status, 0);
     } else {
       /* Proceso hijo */
-      char *args[] = {"/bin/ls", -1, NULL};
+      char *args[] = {"/bin/ls", "-1", NULL};
       execve(args[0], args, environ);
       perror("Error:");
       free(s);

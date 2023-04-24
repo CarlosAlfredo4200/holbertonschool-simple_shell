@@ -45,10 +45,10 @@ void print(char *, int);
 char **tokenizer(char *, char *);
 void remove_newline(char *);
 int _strlen(char *);
- 
+void _strcpy(char *, char *);
 
 /*helpers2*/
-
+int _strcmp(char *, char *);
 char *_strcat(char *, char *);
 int _strspn(char *, char *);
 int _strcspn(char *, char *);
@@ -75,7 +75,6 @@ void quit(char **);
 /*main*/
 extern void non_interactive(void);
 extern void initializer(char **current_command, int type_command);
- 
 
 #endif /*SHELL_H*/
 

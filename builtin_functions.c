@@ -27,9 +27,9 @@ void env(char **tokenized_command __attribute__((unused)))
 
 void quit(char **tokenized_command)
 {
-	int num_token, arg;
+	int num_token = 0, arg;
 
-	for (num_token = 0; tokenized_command[num_token] != NULL; num_token++)
+	for (; tokenized_command[num_token] != NULL; num_token++)
 		;
 	if (num_token == 1)
 	{

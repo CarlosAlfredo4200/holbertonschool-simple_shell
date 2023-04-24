@@ -33,7 +33,7 @@ int parse_command(char *command)
 	}
 	for (i = 0; internal_command[i] != NULL; i++)
 	{
-		if (strcmp(command, internal_command[i]) == 0)
+		if (_strcmp(command, internal_command[i]) == 0)
 			return (INTERNAL_COMMAND);
 	}
 	/* @check_path - checks if a command is found in the PATH */
@@ -54,9 +54,6 @@ int parse_command(char *command)
  *
  * Return: void
  */
-
-
-
 void execute_command(char **tokenized_command, int command_type)
 {
 	void (*func)(char **command);
@@ -92,7 +89,6 @@ void execute_command(char **tokenized_command, int command_type)
 	}
 }
 
-
 /**
  * check_path - checks if a command is found in the PATH
  * @command: command to be used
@@ -109,7 +105,7 @@ char *check_path(char *command)
 	if (path == NULL || _strlen(path) == 0)
 		return (NULL);
 	path_cpy = malloc(sizeof(*path_cpy) * (_strlen(path) + 1));
-	strcpy(path, path_cpy);
+	_strcpy(path, path_cpy);
 	path_array = tokenizer(path_cpy, ":");
 	for (i = 0; path_array[i] != NULL; i++)
 	{
@@ -145,7 +141,7 @@ void (*get_func(char *command))(char **)
 
 	for (i = 0; i < 2; i++)
 	{
-		if (strcmp(command, mapping[i].command_name) == 0)
+		if (_strcmp(command, mapping[i].command_name) == 0)
 			return (mapping[i].func);
 	}
 	return (NULL);

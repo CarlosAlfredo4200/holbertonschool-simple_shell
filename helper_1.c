@@ -1,5 +1,25 @@
 #include "shell.h"
 
+/**
+ *_strcmp - compare two strings
+ *@first: first string to be compared
+ *@second: second string to be compared
+ *
+ * Return: difference of the two strings
+ */
+
+int _strcmp(char *first, char *second)
+{
+	int i = 0;
+
+	while (first[i] != '\0')
+	{
+		if (first[i] != second[i])
+			break;
+		i++;
+	}
+	return (first[i] - second[i]);
+}
 
 /**
  *_strcat - concatenates two strings
@@ -16,8 +36,8 @@ char *_strcat(char *destination, char *source)
 	int len_source = _strlen(source);
 
 	new_string = malloc(sizeof(*new_string) * (len_dest + len_source + 1));
-	strcpy(destination, new_string);
-	strcpy(source, new_string + len_dest);
+	_strcpy(destination, new_string);
+	_strcpy(source, new_string + len_dest);
 	new_string[len_dest + len_source] = '\0';
 	return (new_string);
 }
@@ -66,6 +86,17 @@ int _strcspn(char *str1, char *str2)
 	}
 	return (len);
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**

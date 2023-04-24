@@ -5,13 +5,13 @@
 void prompt(char **av, char **env)
 
 {
-    char *string = NULL;
-    int i, j, status;
-    j = 0;
-    size_t n = 0;
-    ssize_t num_char;
-    char *argv[MAX_COMMAND];
-    pid_t child_pid;
+char *string = NULL;
+char *argv[MAX_COMMAND];
+pid_t child_pid;
+int i, j, status;
+j = 0;
+size_t n = 0;
+ssize_t num_char;
 
     while (1)
     {

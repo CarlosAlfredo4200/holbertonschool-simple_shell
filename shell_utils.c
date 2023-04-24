@@ -8,6 +8,7 @@
  * the extended functions for main.c
  */
 
+
 /** parse_command - determines the type of the command
  * @command: command to be parsed
  *
@@ -32,7 +33,7 @@ int parse_command(char *command)
 	}
 	for (i = 0; internal_command[i] != NULL; i++)
 	{
-		if (_strcmp(command, internal_command[i]) == 0)
+		if (strcmp(command, internal_command[i]) == 0)
 			return (INTERNAL_COMMAND);
 	}
 	/* @check_path - checks if a command is found in the PATH */
@@ -46,6 +47,14 @@ int parse_command(char *command)
 	return (INVALID_COMMAND);
 }
 
+/**
+ * execute_command - executes a command based on it's type
+ * @tokenized_command: tokenized form of the command (ls -l == {ls, -l, NULL})
+ * @command_type: type of the command
+ *
+ * Return: void
+ */
+
 
 
 void execute_command(char **tokenized_command, int command_type)
@@ -54,50 +63,18 @@ void execute_command(char **tokenized_command, int command_type)
 
 	if (command_type == EXTERNAL_COMMAND)
 	{
-		pid_t pid = fork();
-		if (pid == 0)
+		if (execve(tokenized_command[0], tokenized_command, NULL) == -1)
 		{
-			
-			dup2(1, STDOUT_FILENO);
-			if (execve(tokenized_command[0], tokenized_command, NULL) == -1)
-			{
-				perror(_getenv("PWD"));
-				exit(2);
-			}
-		}
-		else if (pid < 0)
-		{
-			perror("Error en la creación de proceso hijo");
-			exit(EXIT_FAILURE);
-		}
-		else
-		{
-			int status;
-			wait(&status);
+			perror(_getenv("PWD"));
+			exit(2);
 		}
 	}
 	if (command_type == PATH_COMMAND)
 	{
-		pid_t pid = fork();
-		if (pid == 0)
+		if (execve(check_path(tokenized_command[0]), tokenized_command, NULL) == -1)
 		{
-			
-			dup2(1, STDOUT_FILENO);
-			if (execve(check_path(tokenized_command[0]), tokenized_command, NULL) == -1)
-			{
-				perror(_getenv("PWD"));
-				exit(2);
-			}
-		}
-		else if (pid < 0)
-		{
-			perror("Error en la creación de proceso hijo");
-			exit(EXIT_FAILURE);
-		}
-		else
-		{
-			int status;
-			wait(&status);
+			perror(_getenv("PWD"));
+			exit(2);
 		}
 	}
 	if (command_type == INTERNAL_COMMAND)
@@ -115,6 +92,7 @@ void execute_command(char **tokenized_command, int command_type)
 	}
 }
 
+
 /**
  * check_path - checks if a command is found in the PATH
  * @command: command to be used
@@ -131,7 +109,7 @@ char *check_path(char *command)
 	if (path == NULL || _strlen(path) == 0)
 		return (NULL);
 	path_cpy = malloc(sizeof(*path_cpy) * (_strlen(path) + 1));
-	_strcpy(path, path_cpy);
+	strcpy(path, path_cpy);
 	path_array = tokenizer(path_cpy, ":");
 	for (i = 0; path_array[i] != NULL; i++)
 	{
@@ -162,11 +140,12 @@ void (*get_func(char *command))(char **)
 {
 	int i;
 	function_map mapping[] = {
-		{"env", env}, {"exit", quit}};
+		{"env", env}, {"exit", quit}
+	};
 
 	for (i = 0; i < 2; i++)
 	{
-		if (_strcmp(command, mapping[i].command_name) == 0)
+		if (strcmp(command, mapping[i].command_name) == 0)
 			return (mapping[i].func);
 	}
 	return (NULL);
@@ -187,7 +166,7 @@ char *_getenv(char *name)
 	for (my_environ = environ; *my_environ != NULL; my_environ++)
 	{
 		for (pair_ptr = *my_environ, name_cpy = name;
-			 *pair_ptr == *name_cpy; pair_ptr++, name_cpy++)
+		     *pair_ptr == *name_cpy; pair_ptr++, name_cpy++)
 		{
 			if (*pair_ptr == '=')
 				break;
@@ -197,3 +176,4 @@ char *_getenv(char *name)
 	}
 	return (NULL);
 }
+

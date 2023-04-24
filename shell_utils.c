@@ -8,7 +8,6 @@
  * the extended functions for main.c
  */
 
-
 /** parse_command - determines the type of the command
  * @command: command to be parsed
  *
@@ -47,31 +46,58 @@ int parse_command(char *command)
 	return (INVALID_COMMAND);
 }
 
-/**
- * execute_command - executes a command based on it's type
- * @tokenized_command: tokenized form of the command (ls -l == {ls, -l, NULL})
- * @command_type: type of the command
- *
- * Return: void
- */
+
+
 void execute_command(char **tokenized_command, int command_type)
 {
 	void (*func)(char **command);
 
 	if (command_type == EXTERNAL_COMMAND)
 	{
-		if (execve(tokenized_command[0], tokenized_command, NULL) == -1)
+		pid_t pid = fork();
+		if (pid == 0)
 		{
-			perror(_getenv("PWD"));
-			exit(2);
+			
+			dup2(1, STDOUT_FILENO);
+			if (execve(tokenized_command[0], tokenized_command, NULL) == -1)
+			{
+				perror(_getenv("PWD"));
+				exit(2);
+			}
+		}
+		else if (pid < 0)
+		{
+			perror("Error en la creación de proceso hijo");
+			exit(EXIT_FAILURE);
+		}
+		else
+		{
+			int status;
+			wait(&status);
 		}
 	}
 	if (command_type == PATH_COMMAND)
 	{
-		if (execve(check_path(tokenized_command[0]), tokenized_command, NULL) == -1)
+		pid_t pid = fork();
+		if (pid == 0)
 		{
-			perror(_getenv("PWD"));
-			exit(2);
+			
+			dup2(1, STDOUT_FILENO);
+			if (execve(check_path(tokenized_command[0]), tokenized_command, NULL) == -1)
+			{
+				perror(_getenv("PWD"));
+				exit(2);
+			}
+		}
+		else if (pid < 0)
+		{
+			perror("Error en la creación de proceso hijo");
+			exit(EXIT_FAILURE);
+		}
+		else
+		{
+			int status;
+			wait(&status);
 		}
 	}
 	if (command_type == INTERNAL_COMMAND)
@@ -136,8 +162,7 @@ void (*get_func(char *command))(char **)
 {
 	int i;
 	function_map mapping[] = {
-		{"env", env}, {"exit", quit}
-	};
+		{"env", env}, {"exit", quit}};
 
 	for (i = 0; i < 2; i++)
 	{
@@ -162,7 +187,7 @@ char *_getenv(char *name)
 	for (my_environ = environ; *my_environ != NULL; my_environ++)
 	{
 		for (pair_ptr = *my_environ, name_cpy = name;
-		     *pair_ptr == *name_cpy; pair_ptr++, name_cpy++)
+			 *pair_ptr == *name_cpy; pair_ptr++, name_cpy++)
 		{
 			if (*pair_ptr == '=')
 				break;
@@ -172,4 +197,3 @@ char *_getenv(char *name)
 	}
 	return (NULL);
 }
-

@@ -48,7 +48,7 @@ void remove_newline(char *);
 void _strcpy(char *, char *);
 
 /*helpers2*/
-int _strcmp(char *, char *);
+ 
 char *_strcat(char *, char *);
 int _strspn(char *, char *);
 int _strcspn(char *, char *);

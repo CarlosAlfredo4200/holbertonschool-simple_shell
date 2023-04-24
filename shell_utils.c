@@ -33,7 +33,7 @@ int parse_command(char *command)
 	}
 	for (i = 0; internal_command[i] != NULL; i++)
 	{
-		if (_strcmp(command, internal_command[i]) == 0)
+		if (strcmp(command, internal_command[i]) == 0)
 			return (INTERNAL_COMMAND);
 	}
 	/* @check_path - checks if a command is found in the PATH */
@@ -141,7 +141,7 @@ void (*get_func(char *command))(char **)
 
 	for (i = 0; i < 2; i++)
 	{
-		if (_strcmp(command, mapping[i].command_name) == 0)
+		if (strcmp(command, mapping[i].command_name) == 0)
 			return (mapping[i].func);
 	}
 	return (NULL);

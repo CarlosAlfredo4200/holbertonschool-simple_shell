@@ -4,25 +4,11 @@
 
 My shell is a basic command line interface that prints a prompt for the user to type a command and then prints exactly what the user typed on the next line.
 
-For proper compilation it uses:
-
-* gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
-
-## **Example of how to launch the shell after compiling:**
-
- *   ./shell
-
-        *       Output: prompt to terminal: $ 
-
 ## **Syntax**
 
-The shell works by using commands given by the user input. The shell commands take in the following syntax: command name {arguments}. The shell executes a command after it is written by user using the command followed by the arguments.
+Myhell executes the commands entered by the user along with the arguments provided. 
 
-cat holberton.h The above example takes in a command by the user followed with the arguments. In this case the command is cat (to view file without opening file) followed by argument the file name in this case holberton.h.
-
-For more information on cat, you can use the man command which will show a manual of the given command or any command you wish to know more information on. It contains system calls, libraries and other important files.
-
-The shell also contains two builtins which are commands that are within the shell itself. The two builtins are exit and env. You can also use help command to know which builtins are provided by the shell. The help command works similarly to the manual where it provides further detail or information on given builtin.
+In the "man" file, which can be used to access the manual for a given command or any command for more information, including system calls, libraries and important files.
 
 ### **Compilation**
 

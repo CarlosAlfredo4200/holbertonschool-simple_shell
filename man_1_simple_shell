@@ -13,8 +13,13 @@ Shell could run in interactive mode where input is accepted from the keyboard. I
 standard input of a standard echo output.
 
 .SH USED COMMANDS
--ls: will list all files and directories in current working directory.
--/bin/ls: command is used to run the "ls" program from the "/bin" location on a Unix system.
--/bin/ls -l: on a command line on a Unix system will display a list of files and directories in the current directory (or in a specified directory if provided with an additional argument) with detailed information for each.
--ls -l /pmp: will display a list of files and directories in the "/tmp" directory with detailed information for each one.
--exit: can be used within a shell script to terminate the execution of the script.
+.B ls 
+  will list all files and directories in current working directory.
+.B /bin/ls 
+  command is used to run the "ls" program from the "/bin" location on a Unix system.
+.B /bin/ls -l  
+  on a command line on a Unix system will display a list of files and directories in the current directory (or in a specified directory if provided with an additional argument) with detailed information for each.
+.B ls -l /pmp 
+  will display a list of files and directories in the "/tmp" directory with detailed information for each one.
+.B exit 
+  can be used within a shell script to terminate the execution of the script.

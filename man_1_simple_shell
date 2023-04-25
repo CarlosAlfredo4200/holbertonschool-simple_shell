@@ -23,3 +23,7 @@ standard input of a standard echo output.
   will display a list of files and directories in the "/tmp" directory with detailed information for each one.
 .B exit 
   can be used within a shell script to terminate the execution of the script.
+
+.SH AUTHORS
+CARLOS MONTOYA <https://github.com/CarlosAlfredo4200>
+JUAN CAMILO PALACIOS <https://github.com/jcamilop>

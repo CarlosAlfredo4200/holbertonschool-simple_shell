@@ -51,19 +51,14 @@ To exit out of a command or process the user can use ctrl c. Control c stops a p
 # **Files**
 
 1. README.md : Current file, contains information about this project.
-2. holberton.h : Header file, contains all prototypes for funcitons used, as well as libriaries
-3. hsh.c: Main file that uses most functions and executes them within this file
-4. ghostinshell.png: Image in readme file
-5. _getenv.c : Contains the code for _printf
-6. _getline.c: File for getting prompt and user input
-7. which.c: File containing the specific functions for conversion specifiers
-8. builtin_execute.c: Executing the builtins
-9. builtins.c: File containing the two builtins
-10. child.c: File that forks and creates parent child processee
-11. free.c: File with free malloc functions
-12. prompt.c: File with actual prompt line $
-13. tokenizer.c: File that creates function to tokenize an array of strings
-14. utility_functions.c: helper functions
+2. BuiltinsFns: builtins funtions
+3. Authors: This file lists all individuals having contributed content to the repository.
+4. FnNoInteractive: a function or shell script that executes automatically without the need for direct user interaction
+5. Inicializer funtions: execute commands on a Unix/Linux-like operating system, using a child process approach to execute external commands or path commands, and        waiting for the completion of the child processes before continuing on to the parent process.
+6. RecyclingFns: Recycling of previously coded functions, with customized features
+7. shell.h: Headers and variables file
+8. shell main.c: Main function (prompt) is executed until an exit condition occurs, such as program termination or an interrupt signal.
+9. shellutills: contains functions to process the PATH, env and executing
 
 # Authors
 * Carlos Alfredo Montoya Goez

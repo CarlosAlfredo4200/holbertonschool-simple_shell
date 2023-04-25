@@ -1,8 +1,8 @@
 # My Shell- C ***simple shell***
 ![](https://st2.depositphotos.com/1084193/8786/v/600/depositphotos_87862980-stock-illustration-dna-abstract-icon-and-element.jpg)
-## CCSH
+## My shell
 
-CCSH is a basic command line interface that prints a prompt for the user to type a command and then prints exactly what the user typed on the next line.
+My shell is a basic command line interface that prints a prompt for the user to type a command and then prints exactly what the user typed on the next line.
 
 For proper compilation it uses:
 

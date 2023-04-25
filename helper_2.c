@@ -22,7 +22,7 @@ char *_strtok_r(char *string, char *delim, char **save_ptr)
 		return (NULL);
 	}
 
-	string += _strspn(string, delim);
+	string += strspn(string, delim);
 	if (*string == '\0')
 	{
 		*save_ptr = string;

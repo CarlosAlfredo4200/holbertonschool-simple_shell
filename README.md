@@ -34,14 +34,8 @@ All files will be compiled with the following:
 
 
 ## **List of useful commands**
-
-* cat - prints and concatenates files to the standard output
-* cp -copies a file into another file
-* grep - helps to search for a file in a specific pattern
-* less - will let you go backward and forward in the files
 * ls - will list all files and directories in current working directory
-* mv - helps to move one file into another file
-* pwd - given you the current working directory
+* /bin/ls - command is used to run the "ls" program from the "/bin" location on a Unix system.
 
 ## **Builtins**
 There are two builtins programmed into the shell. Below is a description and use for each builtin.

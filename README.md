@@ -1,4 +1,4 @@
-# -base- My Shell- C ***simple shell***
+# My Shell- C ***simple shell***
 ![](https://st2.depositphotos.com/1084193/8786/v/600/depositphotos_87862980-stock-illustration-dna-abstract-icon-and-element.jpg)
 ## CCSH
 

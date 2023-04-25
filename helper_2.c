@@ -29,7 +29,7 @@ char *_strtok_r(char *string, char *delim, char **save_ptr)
 		return (NULL);
 	}
 
-	finish = string + _strcspn(string, delim);
+	finish = string + strcspn(string, delim);
 	if (*finish == '\0')
 	{
 		*save_ptr = finish;

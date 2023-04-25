@@ -36,7 +36,8 @@ All files will be compiled with the following:
 ## **List of useful commands**
 * ls - will list all files and directories in current working directory
 * /bin/ls - command is used to run the "ls" program from the "/bin" location on a Unix system.
-* /bin/ls - l - on a command line on a Unix system will display a list of files and directories in the current directory (or in a specified directory if provided with an additional argument) with detailed information for each.
+* /bin/ls -l - on a command line on a Unix system will display a list of files and directories in the current directory (or in a specified directory if provided with     an additional argument) with detailed information for each.
+* ls -l /pmp - will display a list of files and directories in the "/tmp" directory with detailed information for each one. 
 
 ## **Builtins**
 There are two builtins programmed into the shell. Below is a description and use for each builtin.

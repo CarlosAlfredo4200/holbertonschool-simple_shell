@@ -50,7 +50,6 @@ void _strcpy(char *, char *);
 /*helpers2*/
  
 char *_strcat(char *, char *);
-int _strspn(char *, char *);
 int _strcspn(char *, char *);
 char *_strchr(char *, char);
 

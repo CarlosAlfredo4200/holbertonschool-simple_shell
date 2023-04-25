@@ -105,37 +105,5 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	}
 }
 
-/**
- * ctrl_c_handler - handles the signal raised by CTRL-C
- * @signum: signal number
- *
- * Return: void
- */
-void ctrl_c_handler(int signum)
-{
-	if (signum == SIGINT)
-		print("\n($) ", STDIN_FILENO);
-}
-
-/**
- * remove_comment - removes/ignores everything after a '#' char
- * @input: input to be used
- *
- * Return: void
- */
-void remove_comment(char *input)
-{
-	int i = 0;
-
-	if (input[i] == '#')
-		input[i] = '\0';
-	while (input[i] != '\0')
-	{
-		if (input[i] == '#' && input[i - 1] == ' ')
-			break;
-		i++;
-	}
-	input[i] = '\0';
-}
 
 

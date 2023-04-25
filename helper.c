@@ -32,21 +32,6 @@ char **tokenizer(char *input_string, char *delim)
 }
 
 /**
- *print - prints a string to stdout
- *@string: string to be printed
- *@stream: stream to print out to
- *
- *Return: void, return nothing
- */
-void print(char *string, int stream)
-{
-	int i = 0;
-
-	for (; string[i] != '\0'; i++)
-		write(stream, &string[i], 1);
-}
-
-/**
  *remove_newline - removes new line from a string
  *@str: string to be used
  *
@@ -68,19 +53,34 @@ void remove_newline(char *str)
 }
 
 /**
- *_strcpy - copies a string to another buffer
- *@source: source to copy from
- *@dest: destination to copy to
+ * ctrl_c_handler - handles the signal raised by CTRL-C
+ * @signum: signal number
  *
  * Return: void
  */
+void ctrl_c_handler(int signum)
+{
+	if (signum == SIGINT)
+		print("\n($) ", STDIN_FILENO);
+}
 
-void _strcpy(char *source, char *dest)
+/**
+ * remove_comment - removes/ignores everything after a '#' char
+ * @input: input to be used
+ *
+ * Return: void
+ */
+void remove_comment(char *input)
 {
 	int i = 0;
 
-	for (; source[i] != '\0'; i++)
-		dest[i] = source[i];
-	dest[i] = '\0';
+	if (input[i] == '#')
+		input[i] = '\0';
+	while (input[i] != '\0')
+	{
+		if (input[i] == '#' && input[i - 1] == ' ')
+			break;
+		i++;
+	}
+	input[i] = '\0';
 }
-

@@ -34,8 +34,18 @@ All files will be compiled with the following:
 
 * Exiting the shell: To exit the shell, you can type the command exit and press Enter.  
 
-## **Exiting commands and the shell**
-To exit out of a command or process the user can use ctrl c. Control c stops a process and causes it to abort. The user can also utilize the command ctrl D which will just exit. When the command ctrl D is used an exit status of 0 is given. Using exit, you can input its exit status or it is defaulted to the status of the last command executed.
+## **Units C**
+Here you will find the necessary libraries for the correct execution of the shell.
+* <stdio.h>
+* <stdlib.h>
+* <string.h>
+* <sys/types.h>
+* <sys/wait.h>
+* <sys/stat.h>
+* <unistd.h>
+* <errno.h>
+* <dirent.h>
+* <signal.h>
 
 # **Files**
 

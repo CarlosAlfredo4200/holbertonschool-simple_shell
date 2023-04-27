@@ -75,6 +75,7 @@ char **tokenizer(char *input_string, char *delim)
 	char **av = NULL;
 	char *token = NULL;
 	char *save_ptr = NULL;
+	
 
 	token = _strtok_r(input_string, delim, &save_ptr);
 

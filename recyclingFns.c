@@ -123,3 +123,4 @@ void print(char *string, int stream)
 	for (; string[i] != '\0'; i++)
 		write(stream, &string[i], 1);
 }
+

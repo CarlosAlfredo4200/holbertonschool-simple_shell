@@ -4,11 +4,13 @@
 
 My shell is a basic command line interface that prints a prompt for the user to type a command and then prints exactly what the user typed on the next line.
 
-## **Syntax**
+## **Description**
 
-Myhell executes the commands entered by the user along with the arguments provided. 
+My shell is a program that provides a user interface for accessing the services of an operating system and executing commands. The shell program reads user input and interprets it as commands to be executed by the system. The shell uses system calls to interact with the operating system and execute commands.
 
-In the "man" file, which can be used to access the manual for a given command or any command for more information, including system calls, libraries and important files.
+The basic structure of a simple shell program consists of a loop that repeatedly reads user input, parses it into tokens and executes the command. The shell supports several types of commands, including built-in commands such as cd, exit, and env, and external commands that require the execution of an executable file. The shell also supports redirection and I/O piping commands, allowing the user to redirect command input and output or to pipe the output of one command as input to another.
+
+A simple shell can be extended to include additional features such as command history, command completion and scripting capabilities. Shell scripts allow users to automate repetitive tasks by creating scripts that execute multiple commands sequentially. 
 
 ### **Compilation**
 

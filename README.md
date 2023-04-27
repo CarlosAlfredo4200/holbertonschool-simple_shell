@@ -21,10 +21,18 @@ All files will be compiled with the following:
         * gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 
 
-## **Builtins Fns**
-There are two builtins programmed into the shell. Below is a description and use for each builtin.
+## **User's Guide**
+* Open the command prompt: First, open the command prompt on your system. To do this, run "./hsh".
 
-* env - The env command is a command that tells the shell program to display all of the environment variables with their values. It is a way to access those values through the shell.
+* Display the prompt (cisfun$ ): Once the shell is open, a prompt is displayed indicating that it is ready to receive commands.  
+
+* Enter commands: You can now enter commands on the command line after the prompt. Commands are typed as plain text and the Enter key is pressed to send them.
+
+* Execute commands: After pressing the Enter key, the shell will try to execute the entered command. If the command is valid and is in your $PATH, the shell will execute it. Otherwise, it will display an error message.
+
+* View output: After executing the command, the output is displayed in the shell. If the command does not produce output, the prompt will simply appear again.
+
+* Exiting the shell: To exit the shell, you can type the command exit and press Enter.  
 
 ## **Exiting commands and the shell**
 To exit out of a command or process the user can use ctrl c. Control c stops a process and causes it to abort. The user can also utilize the command ctrl D which will just exit. When the command ctrl D is used an exit status of 0 is given. Using exit, you can input its exit status or it is defaulted to the status of the last command executed.
